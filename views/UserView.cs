@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using controllers;
 namespace views
@@ -18,7 +11,6 @@ namespace views
         {
             InitializeComponent();
             login = new Login();
-            newAccountView = new NewAccountView();
         }
 
    
@@ -32,7 +24,9 @@ namespace views
 
         private void button1_Click(object sender, EventArgs e)
         {
-           Boolean ok= Login.validateAccount(usuario, contraseña);
+            String email = emailTextBox.Text.Trim();
+            String password = passwordTextBox.Text.Trim();
+            Boolean ok= login.validateAccount(email, password);
             if(ok)
             {
                 /* mensajito de inicio de sesion*/
@@ -44,39 +38,60 @@ namespace views
         }
 
 
-        private void validateForm()
+        private void button2_Click(object sender, EventArgs e)
         {
-            String nombre = nombreUsuario.Text.Trim();
-            String contraseña;
-            if (nombre == string.Empty || contraseña== string.Empty)
+            newAccountView = new NewAccountView(this.login);
+            newAccountView.Show();
+        }
+
+
+        private void validateEmail()
+        {
+            String email = emailTextBox.Text.Trim();
+            if (email == string.Empty)
             {
-                botonPrestamo.Enabled = false;
-                errorProvider1.SetError(nombreUsuario, "Debe introducir un nombre");
+                this.buttonLogin.Enabled = false;
+                errorProvider1.SetError(emailTextBox, "Debe introducir un nombre");
+            }
+            else
+                {
+                    Boolean ok = login.validateText(email);
+                    if (!ok)
+                    {
+                        errorProvider1.SetError(emailTextBox, "Solo se acepta letras y espacios en blanco");
+                    }
+                    else
+                    {
+                        errorProvider1.SetError(emailTextBox, "");
+                        buttonLogin.Enabled = true;
+                    }
+                }
+            }
+        
+
+        private void validatePassword()
+        {
+            String password = passwordTextBox.Text.Trim();
+            if (password == string.Empty)
+            {
+                this.buttonLogin.Enabled = false;
+                errorProvider2.SetError(passwordTextBox, "Debe introducir una contraseña");
             }
             else
             {
-                Boolean ok = login.validateText(nombe)
-                if (!ok)
-                {
-                    errorProvider1.SetError(nombreUsuario, "Solo se acepta letras y espacios en blanco");
-                }
-                else if(ok)
-                {
-                    Boolean okk = login.validateText(contraseña);
-
-                    if (okk)
-                    {
-                        errorProvider1.SetError(nombreUsuario, "");
-                        botonPrestamo.Enabled = true;
-
-                    }
-                }
- 
+                errorProvider2.SetError(passwordTextBox, "");
+                buttonLogin.Enabled = true;
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void emailTextBox_TextChanged(object sender, EventArgs e)
         {
-            newAccountView.Show();
+            this.validateEmail();
+        }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+            validatePassword();
         }
     }
+}

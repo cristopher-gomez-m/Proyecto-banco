@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using controllers;
 
 namespace views
 {
     public partial class NewAccountView : Form
     {
-        public NewAccountView()
+        Login login;
+        public NewAccountView(Login login)
         {
             InitializeComponent();
+            this.login = login;
         }
     }
 }
