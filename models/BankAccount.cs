@@ -31,6 +31,11 @@ namespace models
         public int getSerial()
         {
             return this.serial;
-        }   
+        }
+
+        public double getAmount()
+        {
+            return this.money;
+        }
     }
 }

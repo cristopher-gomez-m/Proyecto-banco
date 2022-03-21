@@ -2,32 +2,54 @@
 using models;
 namespace controllers
 {
-    class OperationAmount
+    public class OperationAmount
     {
         CreditRequestor creditRequestor;
         UserFinderBD userFinderBD;
-        
-        public OperationAmount(UserFinderBD userFinderBD)
+        Annuality annuality;
+        public OperationAmount(UserAccountFinder userAccountFinder)
         {
-            this.userFinderBD = userFinderBD;   
+            this.userFinderBD = userAccountFinder.getUserFinderBD();
+            
         }
 
-        public Boolean addMount(double monto)
+        public string addMount(double monto,double cuotas)
         {
-            Boolean state;
+            string amountString;
+
             int serial = userFinderBD.getSerial();
-            double finalMount = userFinderBD.addAmount(monto);
-            state= this.userFinderBD.updateMount(serial, finalMount);
-            return state;
+            double finalMount = this.userFinderBD.addAmount(monto);
+             this.userFinderBD.updateMount(serial, finalMount);
+            string annuality = this.getAnnuality(monto, cuotas);
+            amountString = "El dinero actual en la cuenta es de: " + finalMount
+                +" "+annuality;
+            return amountString;
         }
 
-        public Boolean reduceMount(double monto)
+        private string getAnnuality(double monto,double cuotas)
         {
-            Boolean state;
-            int serial = userFinderBD.getSerial();
-            double finalMount = userFinderBD.reduceAmount(monto);
-            state = this.userFinderBD.updateMount(serial, finalMount);
-            return state;
+            this.annuality = new Annuality( cuotas,monto);
+            Console.WriteLine("monto: " + monto);
+            Console.WriteLine("cuotas: " + cuotas);
+            return this.annuality.getAnualidad();
+        }
+
+        public string reduceMount(double monto)
+        {
+            string amountString;
+            double amount = this.userFinderBD.getAmount();
+            if (amount < monto)
+            {
+                 amountString = "Su dinero es de" + amount + " no cuenta con el dinero suficiente para la transacción";
+            }
+            else
+            {
+                int serial = this.userFinderBD.getSerial();
+                double finalMount = this.userFinderBD.reduceAmount(monto);
+                this.userFinderBD.updateMount(serial, finalMount);
+                amountString = "Su dinero final es de: " + finalMount;
+            }
+            return amountString;
         }
 
         public string getAnualidad(double numCuotas, double monto)

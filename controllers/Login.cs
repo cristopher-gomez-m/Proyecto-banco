@@ -20,6 +20,11 @@ namespace controllers
             return this.validator.validarTexto(nombre);
         }
 
+        public Boolean validateAmount(string amount)
+        {
+            return this.validator.validarNumero(amount);
+        }
+
         public Boolean validateAccount(string email, string password)
         {
             Boolean state;

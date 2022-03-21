@@ -4,7 +4,7 @@ namespace models
 {
     public class Annuality
     {
-        private const double PORCENTAJE = 0.07;
+        private const double PORCENTAJE = 0.06;
         private double numCuotas;
         private double monto;
         private string mensaje;
@@ -24,10 +24,14 @@ namespace models
 
         private double calcularAnualidad()
         {
-
-            double potencia = Math.Pow((1 + PORCENTAJE), numCuotas);
+            double porcentaje = 1 + PORCENTAJE;
+            Console.WriteLine("espacio");
+            Console.WriteLine("porcentaje:"+porcentaje);
+            Console.WriteLine("cuotas: " + numCuotas);
+            double potencia = Math.Pow(porcentaje, this.numCuotas);
             double division = 1 / potencia;
             Console.WriteLine("Potencia: " + potencia);
+            Console.WriteLine("Division: " + division);
             anualidad = ((monto * PORCENTAJE) / (1 - division));
             Console.WriteLine("anualidad: " + anualidad);
             return anualidad;

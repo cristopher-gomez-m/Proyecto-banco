@@ -29,11 +29,15 @@ namespace views
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.amountTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cuotas = new System.Windows.Forms.ComboBox();
+            this.borrowMoneyButton = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -45,14 +49,14 @@ namespace views
             this.label1.Size = new System.Drawing.Size(348, 37);
             this.label1.TabIndex = 1;
             this.label1.Text = "Prestamos Bancarios";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // amountTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(327, 164);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(155, 20);
-            this.textBox1.TabIndex = 4;
+            this.amountTextBox.Location = new System.Drawing.Point(327, 164);
+            this.amountTextBox.Name = "amountTextBox";
+            this.amountTextBox.Size = new System.Drawing.Size(155, 20);
+            this.amountTextBox.TabIndex = 4;
+            this.amountTextBox.TextChanged += new System.EventHandler(this.amountTextBox_TextChanged);
             // 
             // label2
             // 
@@ -63,7 +67,6 @@ namespace views
             this.label2.Size = new System.Drawing.Size(126, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Ingrese la cantidad:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -74,27 +77,46 @@ namespace views
             this.label3.Size = new System.Drawing.Size(177, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "Ingrese el número de tazas:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // textBox2
+            // cuotas
             // 
-            this.textBox2.Location = new System.Drawing.Point(327, 237);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(155, 20);
-            this.textBox2.TabIndex = 6;
+            this.cuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cuotas.FormattingEnabled = true;
+            this.cuotas.Location = new System.Drawing.Point(328, 247);
+            this.cuotas.Name = "cuotas";
+            this.cuotas.Size = new System.Drawing.Size(154, 21);
+            this.cuotas.TabIndex = 7;
+            this.cuotas.TextChanged += new System.EventHandler(this.cuotas_TextChanged);
+            // 
+            // borrowMoneyButton
+            // 
+            this.borrowMoneyButton.Location = new System.Drawing.Point(354, 317);
+            this.borrowMoneyButton.Name = "borrowMoneyButton";
+            this.borrowMoneyButton.Size = new System.Drawing.Size(95, 23);
+            this.borrowMoneyButton.TabIndex = 8;
+            this.borrowMoneyButton.Text = "Pedir prestamo";
+            this.borrowMoneyButton.UseVisualStyleBackColor = true;
+            this.borrowMoneyButton.Click += new System.EventHandler(this.borrowMoneyButton_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // AmountAddView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.borrowMoneyButton);
+            this.Controls.Add(this.cuotas);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.amountTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AmountAddView";
             this.Text = "AmountAddView";
+            this.Load += new System.EventHandler(this.AmountAddView_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,9 +125,11 @@ namespace views
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox amountTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox cuotas;
+        private System.Windows.Forms.Button borrowMoneyButton;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

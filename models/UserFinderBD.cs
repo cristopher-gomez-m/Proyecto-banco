@@ -226,7 +226,8 @@ namespace models
         public Boolean updateMount(int serial,double money)
         {
             Boolean state;
-            string sqlCreate = "UPDATE bankaccount SET money='"+money+"'WHERE id='"+serial+"'";
+            Console.WriteLine("llegue al principio");
+            string sqlCreate = "UPDATE bankaccount SET `money`='" + money+"' WHERE `serial`='"+serial+"'";
             MySqlConnection connection = Connection.conexion();
             connection.Open();
 
@@ -246,6 +247,11 @@ namespace models
         public int getSerial()
         {
             return this.user.getBankAccountSerial();   
+        }
+
+        public double getAmount()
+        {
+            return this.user.getBankAccount().getAmount();
         }
 
         public double addAmount(double monto)
