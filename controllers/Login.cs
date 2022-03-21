@@ -24,13 +24,13 @@ namespace controllers
         {
             Boolean state;
              user = this.getUser(email,password);
-            if (user == null)
+            if (user != null)
             {
-                state = false;
+                state = true;
             }
             else
             {
-                state = true;
+                state = false;
             }
 
             return state;
@@ -38,7 +38,12 @@ namespace controllers
 
         public User getUser(string email,string password)
         {
-            return userAccountFinder.getUser(email,password);
+            return this.userAccountFinder.getUser(email,password);
+        }
+
+        public UserAccountFinder getUserAccountFinder()
+        {
+            return this.userAccountFinder;
         }
     }
 }

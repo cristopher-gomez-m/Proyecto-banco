@@ -12,12 +12,12 @@ namespace controllers
         User user;
         public UserAccountFinder()
         {
-            userFinderBD = new UserFinderBD();
+            this.userFinderBD = new UserFinderBD();
         }
 
         private void findUser(string email, string password)
         {
-           user= this.userFinderBD.findUser(email, password);
+            user = this.userFinderBD.findUser(email, password);
             
         }
 
@@ -25,6 +25,11 @@ namespace controllers
         {
             this.findUser(email, password);
             return this.user;
+        }
+
+        public UserFinderBD getUserFinderBD()
+        {
+            return this.userFinderBD;
         }
     }
 }

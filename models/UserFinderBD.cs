@@ -78,12 +78,12 @@ namespace models
                         return password = float.Parse(reader.GetString(0));
                     }
                 }
- 
+                return password=0;
             }
             catch (MySqlException e)
             {
-               
-                       
+
+                return password = 0;
             }
             finally
             {
@@ -93,12 +93,10 @@ namespace models
 
         public User findUser(string email,string password)
         {
-
-            string sqlRead = "SELECT bankaccount_serial FROM user WHERE e-mail LIKE " + email+"and password LIKE "+password;
+            string sqlRead = "SELECT bankaccount_serial FROM user WHERE `e-mail` LIKE '" + email+ "'and `password` LIKE '" + password+"'";
             MySqlDataReader reader;
             MySqlConnection connection = Connection.conexion();
             connection.Open();
-
             try
             {
                 MySqlCommand command = new MySqlCommand(sqlRead, connection);
@@ -107,13 +105,15 @@ namespace models
                 {
                     while (reader.Read())
                     {
+
+                    
                         int serial = int.Parse(reader.GetString(0));
                         float money = this.findBankAccount(serial);
-                        bankAccount = new BankAccount(serial, money);
+                        this.bankAccount = new BankAccount(serial, money);
 
-                        user = new User(email, password, bankAccount);
+                        this.user = new User(email, password, this.bankAccount);
                     }
-                    return user;
+                return user;
                 }
                 else
                 {
@@ -134,15 +134,17 @@ namespace models
 
         public Boolean createUser(string user,string password,int serial)
         {
+            Console.WriteLine("Llegue a 5");
             Boolean state;
-            string sqlCreate = "INSERT INTO user (e-mail,password,bankaccount_serial) VALUES('"+user
+            string sqlCreate = "INSERT INTO user (`e-mail`,`password`,`bankaccount_serial`) VALUES('" +user
                 +"','"+password+"','"+serial+"') ";
             MySqlConnection connection = Connection.conexion();
             connection.Open();
-
+            Console.WriteLine("Llegue a 4");
             try 
             {
                 Boolean stateBankAccount = this.createBankAccount(serial,0.0,user);
+                Console.WriteLine("Llegue a 3");
                 if (stateBankAccount)
                 {
                     MySqlCommand command = new MySqlCommand(sqlCreate, connection);
@@ -164,8 +166,8 @@ namespace models
         private Boolean createBankAccount(int serial, double money,string user_email)
         {
             Boolean state;
-            string sqlCreate = "INSERT INTO bankaccount (serial,money) VALUES('" + serial
-                + "','" + money+ "') ";
+            string sqlCreate = "INSERT INTO bankaccount (`serial`,`money`) VALUES('" + serial
+                + "','" +money+"')";
             MySqlConnection connection = Connection.conexion();
             connection.Open();
 

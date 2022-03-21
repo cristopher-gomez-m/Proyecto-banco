@@ -147,7 +147,6 @@ namespace views
             this.Controls.Add(this.label1);
             this.Name = "UserView";
             this.Text = "e";
-            this.Load += new System.EventHandler(this.UserView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();

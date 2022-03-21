@@ -7,6 +7,7 @@ namespace views
     {
         Login login;
         NewAccountView newAccountView;
+        TransaccionsViews transaccionsViews;
         public UserView()
         {
             InitializeComponent();
@@ -17,23 +18,23 @@ namespace views
 
 
 
-        private void UserView_Load(object sender, EventArgs e)
-        {
-
-        }
+   
 
         private void button1_Click(object sender, EventArgs e)
         {
             String email = emailTextBox.Text.Trim();
             String password = passwordTextBox.Text.Trim();
             Boolean ok= login.validateAccount(email, password);
-            if(ok)
+            if (ok)
             {
-                /* mensajito de inicio de sesion*/
+                transaccionsViews = new TransaccionsViews(this.login.getUserAccountFinder());
+                transaccionsViews.Show();
             }
             else
             {
-                /* usuario o contraseña no valido*/
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                string mensaje = "Usuario o contraseña incorrecto";
+                MessageBox.Show(mensaje, "Cuenta inexistente", buttons);
             }
         }
 

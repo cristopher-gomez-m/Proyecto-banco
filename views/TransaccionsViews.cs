@@ -7,24 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using controllers;
 
 namespace views
 {
     public partial class TransaccionsViews : Form
     {
-        public TransaccionsViews()
+        UserAccountFinder userAccountFinder;
+        public TransaccionsViews(UserAccountFinder userAccountFinder)
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
+            this.userAccountFinder = userAccountFinder;
 
         }
 
-        private void TransaccionsViews_Load(object sender, EventArgs e)
-        {
+   
 
-        }
+
+  
     }
 }

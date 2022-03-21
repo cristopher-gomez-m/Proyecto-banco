@@ -7,13 +7,13 @@ using models;
 
 namespace controllers
 {
-    class UserAccountCreator
+    public class UserAccountCreator
     {
         private UserFinderBD userFinderBD;
 
-        public UserAccountCreator(UserFinderBD userFinderBD)
+        public UserAccountCreator()
         {
-            this.userFinderBD = userFinderBD;
+            this.userFinderBD = new UserFinderBD();
         }
 
         private int createSerial()
@@ -32,6 +32,7 @@ namespace controllers
 
         public Boolean createAccount(string user,string password)
         {
+            Console.WriteLine("Llegue a createAccount");
             Boolean state;
             int serial = this.createSerial();
             state =   userFinderBD.createUser(user, password, serial);

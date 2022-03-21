@@ -43,7 +43,6 @@ namespace views
             this.label1.Size = new System.Drawing.Size(312, 37);
             this.label1.TabIndex = 1;
             this.label1.Text = "Bienvenidos a ADB";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button1
             // 
@@ -75,7 +74,6 @@ namespace views
             this.Controls.Add(this.label1);
             this.Name = "TransaccionsViews";
             this.Text = "TransaccionsViews";
-            this.Load += new System.EventHandler(this.TransaccionsViews_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

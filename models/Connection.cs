@@ -16,11 +16,10 @@ namespace models
             string usuario = "root";
             string password = "748596alex";
 
-            string cadenaSQL = "Database" + bd + "; Data Source=" +
-                servidor + "; User Id=" + usuario + "; Password=" +
-                password;
+            string cadenaSQL = "Server=" + servidor + "; Database=" + bd + "; User Id= " + usuario + "; Password=" + password + "";
 
-            try 
+
+            try
             {
                 MySqlConnection conexionBD = new MySqlConnection(cadenaSQL);
                 return conexionBD;
